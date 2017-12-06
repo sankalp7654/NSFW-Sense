@@ -11,31 +11,31 @@ public class Main {
 
 	public static void main(String [ ] args) throws IOException {
 	
-		/*
-		 * Authorizing our Java application with the API key using the client
-		 * client will call the API by making the request
-		 * ClarifaiClient is provided by the Clarifai for making request in Java  
-		 */
+	     /*
+             * Authorizing our Java application with the API key using the client
+	     * client will call the API by making the request
+	     * ClarifaiClient is provided by the Clarifai for making request in Java  
+	     */
 	    
-		ClarifaiClient client = new ClarifaiBuilder("a2ecf96cfb4544f3b357d845adecdf8d").buildSync();
+	     ClarifaiClient client = new ClarifaiBuilder("a2ecf96cfb4544f3b357d845adecdf8d").buildSync();
 		
-		/*
-		 * 
-		 * ABOUT THE API RESPONSE
-		 * The API returns two tags SFW (SAFE FOR VIEWING) and NSFW (NOT SAFE FOR VIEWING) after processing the image sent by our application
-		 * The first "name" tag which is returned depends on the nudity of the image 
-		 * if the image seems to be nude then first tag will be NSFW else it will be SFW
-		 * 
-		 */
+	     /*
+	     * 
+	     * ABOUT THE API RESPONSE
+	     * The API returns two tags SFW (SAFE FOR VIEWING) and NSFW (NOT SAFE FOR VIEWING) after processing the image sent by our application
+	     * The first "name" tag which is returned depends on the nudity of the image 
+	     * if the image seems to be nude then first tag will be NSFW else it will be SFW
+             * 
+	     */
 		
-		/*
-		 * THINGS TO BE DONE
-		 * (See the JSON file for more clarification)
-		 * 1 Store the "name" key present under the "concepts" object. 
-		 *   This "name" will contain either SFW or NSFW
-		 * 2 Store the "value" key present under the "concept" object.
-		 *   This "value" will contain the predicted value for "corresponding" name tag. 
-		 */
+	     /*
+	     * THINGS TO BE DONE
+	     * (See the JSON file for more clarification)
+	     * 1 Store the "name" key present under the "concepts" object. 
+             *   This "name" will contain either SFW or NSFW
+             * 2 Store the "value" key present under the "concept" object.
+   	     *   This "value" will contain the predicted value for "corresponding" name tag. 
+	     */
 		
 	    final List<ClarifaiOutput<Concept>> predictionResults =
 			    client.getDefaultModels().nsfwModel() 
@@ -52,27 +52,26 @@ public class Main {
 	    
 	    Gson gson = new Gson();
 	    String json = gson.toJson(predictionResults); // Converts List of Concepts to JSON output 
-   //   System.out.println(json);   Uncommenting this will print the entire response sent by the Clarifai API
+   //       System.out.println(json);   Uncommenting this will print the entire response sent by the Clarifai API
 
-     	int getName = json.indexOf("concepts"); // Returns the position of first character i.e. 'c' of the object "concepts" to getName  
+     	    int getName = json.indexOf("concepts"); // Returns the position of first character i.e. 'c' of the object "concepts" to getName  
     
-     	/*
-     	 * Now we need to find the position of "name" tag present under the object "concepts"
-     	 */
+       	    /*
+       	     * Now we need to find the position of "name" tag present under the object "concepts"
+     	     */
      	
-     	getName = json.indexOf("name", getName); // Returns the position of the first character i.e. 'n' present inside the object "concepts" to getName      	
+   	    getName = json.indexOf("name", getName); // Returns the position of the first character i.e. 'n' present inside the object "concepts" to getName      	
       	
-     	getName = getName + 7; // Inorder to skip   ame":"sfw"  (Returns the position of the first character present under "name" tag i.e. SFW or NSFW, In this case it returns the position of character 's') 
-      	while(json.charAt(getName) != '"')
-      	{
-          	System.out.print(json.charAt(getName));
+     	    getName = getName + 7; // Inorder to skip   ame":"sfw"  (Returns the position of the first character present under "name" tag i.e. SFW or NSFW, In this case it returns the position of character 's') 
+      	    while(json.charAt(getName) != '"')
+      	    {
+            	System.out.print(json.charAt(getName));
           	getName++;
-      	}
-     	System.out.print(" : ");
+      	    }
+     	    System.out.print(" : ");
    	
-     
-     
-        int getValue = json.indexOf("value"); // Getting the value sent by the API corresponding to the "name" tag under the object "concepts"
+          
+            int getValue = json.indexOf("value"); // Getting the value sent by the API corresponding to the "name" tag under the object "concepts"
 	   /* 
 	    * getValue will contain the index of 'v'
 	    * we will add 7 to the variable to skip the string    alue":0.90312743
@@ -86,7 +85,7 @@ public class Main {
 	 	   getValue ++;
 	    }
    	    
-	}
+      }
 }
 
 
