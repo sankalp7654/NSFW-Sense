@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String [ ] args) throws IOException {
 	
-	     /*
+	    /*
              * Authorizing our Java application with the API key using the client
 	     * client will call the API by making the request
 	     * ClarifaiClient is provided by the Clarifai for making request in Java  
@@ -19,7 +19,7 @@ public class Main {
 	    
 	     ClarifaiClient client = new ClarifaiBuilder("a2ecf96cfb4544f3b357d845adecdf8d").buildSync();
 		
-	     /*
+	    /*
 	     * 
 	     * ABOUT THE API RESPONSE
 	     * The API returns two tags SFW (SAFE FOR VIEWING) and NSFW (NOT SAFE FOR VIEWING) after processing the image sent by our application
@@ -28,7 +28,7 @@ public class Main {
              * 
 	     */
 		
-	     /*
+	    /*
 	     * THINGS TO BE DONE
 	     * (See the JSON file for more clarification)
 	     * 1 Store the "name" key present under the "concepts" object. 
