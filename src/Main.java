@@ -89,61 +89,55 @@ public class Main {
 	    
 	    char [] getValue = new char[20]; // Stores the value (Probability)
 	    int j=0;
-	    while((json.charAt(getPositionOfValue)) != '}') // Iterate till we get '}' as the end-point lies here for the value of SFW
+	    while((json.charAt(getPositionOfValue)) != '}') // Iterate till we get '}' as the end-point lies here for the value of SFW or NSFW
 	    {
 	 	   getValue[j++] = json.charAt(getPositionOfValue);    
 	 	   getPositionOfValue ++;
 	    }
 
-//	    String valueInString = new String(getValue); // Converting the character array to string to get number
-//   	    System.out.println(valueInString); // Displaying the value
-//   	    
    	    StringToInteger obj1 = new StringToInteger();
    	    Double value = obj1.parseInt(getValue);
    	    System.out.println(value);
    	    
-   	    if((value > 0.15) && (value < 0.75)) {
-   	    		int getPositionOfNextName = json.indexOf("name",getPositionOfName);
-   	         getPositionOfNextName = getPositionOfNextName + 7;
+   	    if((value > 0.15) && (value < 0.75)) 
+   	    {
+   	    		 	int getPositionOfNextName = json.indexOf("name",getPositionOfName);
+   	    		 	getPositionOfNextName = getPositionOfNextName + 7;
    	        
-   	      char [] getNextName = new char[10]; // Using to store the result i.e either SFW or NSFW character by character 
-          int p=0;
-          while(json.charAt(getPositionOfNextName) != '"')
-        	{
-            	getNextName[p++] = json.charAt(getPositionOfNextName);
-            	getPositionOfNextName++;
-        	}
-          getNextName[p] = '\0';
+   	    		 	char [] getNextName = new char[10]; // Using to store the result i.e either SFW or NSFW character by character 
+   	    		 	int p=0;
+   	    		 	
+   	    		 	while(json.charAt(getPositionOfNextName) != '"')
+   	    		 	{
+   	    		 		getNextName[p++] = json.charAt(getPositionOfNextName);
+   	    		 		getPositionOfNextName++;
+   	    		 	}
+   	    		 	getNextName[p] = '\0';
           
-          String nextName = new String(getNextName); // Converting the character array to string to get name  
-        	System.out.print(nextName + " : "); // Displaying the value of name tag 
+   	    		 	String nextName = new String(getNextName); // Converting the character array to string to get next name tag  
+   	    		 	System.out.print(nextName + " : "); // Displaying the value of next name tag 
         	
-        	   int getPositionOfNextValue = json.indexOf("value",getPositionOfValue); // Getting the value sent by the API corresponding to the "name" tag under the object "concepts"
-        	   /* 
-        	    * getPositionOfValue will contain the index of 'v'
-        	    * we will add 7 to the variable to skip the string    alue":0.90312743
-        	    * so the getPositionOfValue will point to first digit present in the string value i.e here 0
-        	    */
-        	    getPositionOfNextValue = getPositionOfNextValue + 7;   
+   	    		 	int getPositionOfNextValue = json.indexOf("value",getPositionOfValue); // Getting the value sent by the API corresponding to the "name" tag under the object "concepts"
+   	    		 	/* 
+   	    		 	 * getPositionOfNextValue will contain the index of 'v'
+   	    		 	 * we will add 7 to the variable to skip the string    alue":0.90312743
+   	    		 	 * so the getPositionOfNextValue will point to first digit present in the string value i.e here 0
+   	    		 	 */
+   	    		 	getPositionOfNextValue = getPositionOfNextValue + 7;   
         	    
-        	    char [] getNextValue = new char[20]; // Stores the value (Probability)
-        	    int q=0;
-        	    while((json.charAt(getPositionOfNextValue)) != '}') // Iterate till we get '}' as the end-point lies here for the value of SFW
-        	    {
-        	 	   getNextValue[q++] = json.charAt(getPositionOfNextValue);    
-        	 	   getPositionOfNextValue ++;
-        	    }
-
-//        	    String valueInString = new String(getValue); // Converting the character array to string to get number
-//           	    System.out.println(valueInString); // Displaying the value
-//           	    
-           	    StringToInteger obj2 = new StringToInteger();
-           	    Double nextValue = obj2.parseInt(getNextValue);
-           	    System.out.println(nextValue);
-           	    	
-       
-	}
-   }
+   	    		 	char [] getNextValue = new char[20]; // Stores the value (Probability) for "name" tag
+   	    		 	int q=0;
+   	    		 	while((json.charAt(getPositionOfNextValue)) != '}') // Iterate till we get '}' as the end-point lies here for the value of SFW or NSFW based on "name" tag
+   	    		 	{
+   	    		 		getNextValue[q++] = json.charAt(getPositionOfNextValue);    
+   	    		 		getPositionOfNextValue ++;
+   	    		 	}
+   	    		 	
+   	    		 	StringToInteger obj2 = new StringToInteger();
+   	    		 	Double nextValue = obj2.parseInt(getNextValue);
+   	    		 	System.out.println(nextValue);    	    	
+   	    }
+    }
 }
 	
 
